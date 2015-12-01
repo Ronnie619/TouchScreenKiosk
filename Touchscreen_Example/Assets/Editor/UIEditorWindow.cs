@@ -1,9 +1,10 @@
-﻿//todo: dragging movement needs to actually mvoe the camera not the objects
-//		scaling?
-//		debugging 	still an issue of some lines being made where they shouldn't (not yet replicated)
-//					some issue with adding in new UIWindows creating lines (not yet replicated)
-//					some issue with being unable to drag lines from boxes (not yet replicated)
-//		if we need more than 1 copy of a window for some reason, will need to move to instantiating new instances of each window
+﻿//todo: 
+//		scaling/zooming Doesn't work very well, looked into it, hopefully not wanted
+//
+//		debugging	some issue with being unable to drag lines from boxes (not yet replicated)
+//
+//		if we need more than 1 copy of a window for some reason, will need to move to instantiating
+//			new instances of each window or use a scriptable object to store the data
 
 using UnityEngine;
 using UnityEditor;
@@ -37,33 +38,54 @@ public class UIEditorWindow : EditorWindow {
 
 	}
 
+	/// <summary>
+	/// Initializes the reset, have to reset lines beforehand since the data is held on the UIWindow.
+	/// other option might be to flag for reset, and reset on the next run
+	/// </summary>
 	[MenuItem("UI/Reset UI")]
 	static void InitializeReset() {
-//		UIEditorWindow window  = (UIEditorWindow)EditorWindow.GetWindow(typeof(UIEditorWindow), true, "UI");
-		UIEditorWindowData myInstance;
+		UIEditorWindow window  = (UIEditorWindow)EditorWindow.GetWindow(typeof(UIEditorWindow), true, "UI");
+		UIEditorWindowData myInstance = (UIEditorWindowData )Resources.Load("editorWindowData") as UIEditorWindowData;
+		window.data = myInstance;
+		window.Init(); //Init the data
+		window.ResetLines(); //Reset lines
+		window.SaveData(); //Save the UIWindows
+		window.Close(); //Close
+
 		Debug.Log ("Creating new data file");
 		myInstance = CreateInstance<UIEditorWindowData>();
 		AssetDatabase.CreateAsset(myInstance , "Assets/Resources/editorWindowData.asset");
 		AssetDatabase.SaveAssets();
 		AssetDatabase.Refresh();
-//		window.data = myInstance;
-//		window.Init();
-		UIEditorWindow window  = (UIEditorWindow)EditorWindow.GetWindow(typeof(UIEditorWindow), true, "UI");
-		window.Close();
+
+
 		Initialize();
 	}
 
 	//Save changes on disable
 	void OnDisable() {
-		data.windows.Clear();
-		data.UIWindows.Clear();
+		if (data != null)
+			SaveData ();
+	}
+
+	/// <summary>
+	/// Saves the data to the serialized object
+	/// </summary>
+	void SaveData ()
+	{
+		data.windows.Clear ();
+		data.UIWindows.Clear ();
 		foreach (Rect r in windows) {
-			data.windows.Add(r);
+			data.windows.Add (r);
 		}
-		foreach(UIWindow w in UIWindows) {
-			data.UIWindows.Add(w);
+		foreach (UIWindow w in UIWindows) {
+			data.UIWindows.Add (w);
+			w.linkedWindows.Clear();
+			foreach (UIWindow t in w.tempLinkedWindows) {
+				w.linkedWindows.Add (t);
+			}
 		}
-		data.lineMode = lineMode;		
+		data.lineMode = lineMode;
 	}
 
 	/// <summary>
@@ -77,6 +99,10 @@ public class UIEditorWindow : EditorWindow {
 		}
 		foreach (UIWindow w in data.UIWindows) {
 			UIWindows.Add(w);
+			w.tempLinkedWindows.Clear();
+			foreach(UIWindow t in w.linkedWindows) {
+				w.tempLinkedWindows.Add(t);
+			}
 		}
 		lineMode = data.lineMode;
 
@@ -90,7 +116,7 @@ public class UIEditorWindow : EditorWindow {
 	void ResetWindows ()
 	{
 		foreach (UIWindow w in data.UIWindows) {
-			w.linkedWindows.Clear ();
+			w.tempLinkedWindows.Clear ();
 		}
 		UIWindows.Clear ();
 		windows.Clear ();
@@ -98,10 +124,10 @@ public class UIEditorWindow : EditorWindow {
 
 	void ResetLines() {
 		foreach (UIWindow w in data.UIWindows) {
-			w.linkedWindows.Clear();
+			w.tempLinkedWindows.Clear();
 		}
 		foreach (UIWindow w in UIWindows) {
-			w.linkedWindows.Clear();
+			w.tempLinkedWindows.Clear();
 		}
 	}
 
@@ -123,10 +149,10 @@ public class UIEditorWindow : EditorWindow {
 			}
 			src = null;
 		}
-		if (GUILayout.Button("Reset")) {
-			ResetWindows ();
+		if (GUILayout.Button("Save")) {
+			SaveData();
 		}
-		if (GUILayout.Button("Revert")) {
+		if (GUILayout.Button("Revert to Save")) {
 			Init();
 		}
 		EditorGUILayout.EndHorizontal();
@@ -134,6 +160,10 @@ public class UIEditorWindow : EditorWindow {
 		lineMode = GUILayout.SelectionGrid(lineMode, lineModes, 3, GUILayout.MaxWidth(350));
 		if (GUILayout.Button("Reset Lines")) {
 			ResetLines();
+		}
+		if (GUILayout.Button("Reset All")) {
+			ResetLines();
+			ResetWindows ();
 		}
 		EditorGUILayout.EndHorizontal();
 		
@@ -152,7 +182,7 @@ public class UIEditorWindow : EditorWindow {
 //		Handles.DrawLine(lineTransforms[1], lineTransforms[1] + new Vector2(0, 25000));
 
 		foreach (UIWindow w in UIWindows) {
-			foreach(UIWindow l in w.linkedWindows) {
+			foreach(UIWindow l in w.tempLinkedWindows) {
 				int wIndex = UIWindows.IndexOf(w);
 				int lIndex = UIWindows.IndexOf(l);
 		
@@ -193,17 +223,37 @@ public class UIEditorWindow : EditorWindow {
 		//Mouse drag to drag all the stuff around
 		if (e.type == EventType.MouseDrag && e.button == 0) {
 //			Debug.Log ("Drag " + e.delta);`
-			for (int i = 0; i < windows.Count; i++) {
-				Rect r = windows[i];
-				r.position += e.delta; //Update position based on mouse delta
-				//Check for positions less than 0 on x and y to prevent losing things easily
-				if (r.position.x < 0)
-					r.position = new Vector2(0, r.position.y);
-				if (r.position.y < 50)
-					r.position = new Vector2(r.position.x, 50);
 
+			bool stopDrag = false;
+			for (int i = 0; i < windows.Count; i++) {
+				Rect r = windows [i];
+				if ((r.position + e.delta).x < 0) {
+					r.position = new Vector2 (0, r.position.y);
+					stopDrag = true;
+				}
+				if ((r.position + e.delta).y < 50) {
+					r.position = new Vector2 (r.position.x, 50);
+					stopDrag = true;
+				}
 				windows[i] = r;
-				Repaint(); //Force repaint or it won't repaint it until mouse drag finishes
+				Repaint();
+			}
+
+			if (!stopDrag) {
+				for (int i = 0; i < windows.Count; i++) {
+					Rect r = windows[i];
+
+					r.position += e.delta; //Update position based on mouse delta
+
+					//Check for positions less than 0 on x and y to prevent losing things easily
+	//				if (r.position.x < 0)
+	//					r.position = new Vector2(0, r.position.y);
+	//				if (r.position.y < 50)
+	//					r.position = new Vector2(r.position.x, 50);
+
+					windows[i] = r;
+					Repaint(); //Force repaint or it won't repaint it until mouse drag finishes
+				}
 			}
 
 //			for (int i = 0; i<2; i++) {
@@ -231,14 +281,14 @@ public class UIEditorWindow : EditorWindow {
 
 		if (e.type == EventType.MouseUp && startID > -1 && startID != windowID) {
 //			Debug.Log("connected " + startID + " and " + windowID);
-			if (!UIWindows[startID].linkedWindows.Contains(UIWindows[windowID]))
-				UIWindows[startID].linkedWindows.Add(UIWindows[windowID]);
+			if (!UIWindows[startID].tempLinkedWindows.Contains(UIWindows[windowID]))
+				UIWindows[startID].tempLinkedWindows.Add(UIWindows[windowID]);
 			startID = -1;
 			Repaint();
 		}
 
 		if (Event.current.control && e.type == EventType.mouseUp && e.button == 1) {
-			UIWindows[windowID].linkedWindows.Clear();
+			UIWindows[windowID].tempLinkedWindows.Clear();
 			Repaint();
 		}
 
