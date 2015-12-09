@@ -1,0 +1,43 @@
+Schedule:
+  1/12/16
+    Reviewing current project status.
+    Ronnie: Webscraping and data storage in Unity. 
+    Morgan: Page types, depth/position, information page creation.
+  1/19/16
+    Initial testing of projector and Ubi system complete.
+    Projector space requirements documented.
+    Meet with Tanya and Amy about flow.
+  1/26/16
+    Design Meeting
+    Morgan: Ubi touch implementation with unity.
+    Ronnie: Webscraping of couple pages done.
+  2/2/16
+    Meet with Tanya and Amy about "Dean History" and "Maps"
+    Morgan: add tools to handle flow requirements
+  2/3/16
+    Register for EXPO
+  2/9/16  
+    Meet and iterate on flow tools.
+    Demo of persistant UI elements.
+  2/16/16
+    Revisit schedule and due dates for rest of semester.
+    Continue data collection and meetings with Tanya and Amy.
+  2/23/16
+  3/1/16
+  3/8/16
+    Tweaking and testing of snapshot deadlines complete.
+  3/10/16
+    Snapshot
+    Update wiki with new project status and team documentation
+    All framework design and foundational coding should be finalized
+  3/15/16
+    BREAK
+  3/22/16
+  3/29/16
+  4/5/16
+  4/12/16
+  4/19/16
+  4/26/16
+    Expo presentation material ready.
+  5/1/16
+    EXPO: Finished Product
