@@ -1,0 +1,15 @@
+Tools Needed for Project
+
+1.) Tool to add an image from the web and locally from a hard drive. Fully resizable, of course.
+
+2.) Tool to add SVG graphics (third party asset most likely).
+
+3.) Tool to add blocks of text. They should be able to adjust the size and color of the text for making page headers and such. Should we keep the font type static for consistency or also include the ability to change the fonts?
+
+4.) Tool to create hyperlinks that connect to a specified webpage.
+
+5.) Tool to choose from a series of possible transition animations.
+
+6.) Tool to edit the background color of an entire panel.
+
+7.) Tool to be able to embed videos from YouTube and such.
