@@ -4,7 +4,7 @@ Tools Needed for Project
 
 2.) Tool to add SVG graphics (third party asset most likely).
 
-3.) Tool to add blocks of text. They should be able to adjust the size and color of the text for making page headers and such. Should we keep the font type static for consistency or also include the ability to change the fonts?
+3.) (Morgan) Tool to add blocks of text. They should be able to adjust the size and color of the text for making page headers and such. Should we keep the font type static for consistency or also include the ability to change the fonts?
 
 4.) Tool to create hyperlinks that connect to a specified webpage.
 
