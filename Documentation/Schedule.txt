@@ -3,7 +3,8 @@ Schedule:
     Snapshot
     Update wiki with new project status and team documentation
     All framework design and foundational coding should be finalized
-    Get funding for and purchase SVG and youtube or whatever unity apps we need
+    (Ronnie) Get funding for and purchase SVG and youtube or whatever unity apps we need
+    (Ronnie) Document transitions and find examples
   3/15/16
     BREAK
   3/22/16
