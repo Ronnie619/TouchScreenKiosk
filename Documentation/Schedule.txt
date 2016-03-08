@@ -1,43 +1,38 @@
 Schedule:
-  1/12/16
-    Reviewing current project status.
-    Ronnie: Webscraping and data storage in Unity. 
-    Morgan: Page types, depth/position, information page creation.
-  1/19/16
-    Initial testing of projector and Ubi system complete.
-    Projector space requirements documented.
-    Meet with Tanya and Amy about flow.
-  1/26/16
-    Design Meeting
-    Morgan: Ubi touch implementation with unity.
-    Ronnie: Webscraping of couple pages done.
-  2/2/16
-    Meet with Tanya and Amy about "Dean History" and "Maps"
-    Morgan: add tools to handle flow requirements
-  2/3/16
-    Register for EXPO
-  2/9/16  
-    Meet and iterate on flow tools.
-    Demo of persistant UI elements.
-  2/16/16
-    Revisit schedule and due dates for rest of semester.
-    Continue data collection and meetings with Tanya and Amy.
-  2/23/16
-  3/1/16
-  3/8/16
-    Tweaking and testing of snapshot deadlines complete.
   3/10/16
     Snapshot
     Update wiki with new project status and team documentation
     All framework design and foundational coding should be finalized
+    Get funding for and purchase SVG and youtube or whatever unity apps we need
   3/15/16
     BREAK
   3/22/16
+    Implement unity apps we've purchased and add functionality to use them
+    Creation Tools Finished
+    Begin Creation Tools UI/UX testing (Find who will be using the tools I think 2 gals I can't remember their names in the CS department and see if the tools are intuitive, take notes for revision)
+    (Morgan) Transitions + Screen Storing finished
   3/29/16
+    UI/UX testing phase 1 finished
+    Revise creation tools #1
+    (Morgan) Menu Serialization framework finished
   4/5/16
+    UI/UX testing phase 2 (Monday/Tuesday)
+    Revise creation tools #2 (By next week)
   4/12/16
+    (Morgan) Menu Serialization finalized to go with any last revisions to CC tools
   4/19/16
+    Everything finished, 2 weeks to create the menus and populate all the information
   4/26/16
     Expo presentation material ready.
   5/1/16
     EXPO: Finished Product
+
+Todo
+Implement Ubi input
+Finish creation tools
+transitions + screen storing (transition screen to screen)
+screen splitting
+screen storing serialization for persistence
+creation tools UI/UX (take tools and get them checked for usability, also design a usage guide)
+
+Create content after everything else is done
