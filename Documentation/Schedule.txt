@@ -22,6 +22,7 @@ Schedule:
     (Morgan) Menu Serialization finalized to go with any last revisions to CC tools
   4/19/16
     Everything finished, 2 weeks to create the menus and populate all the information
+    Create Manual for editting the menus in the future
   4/26/16
     Expo presentation material ready.
   5/1/16
@@ -33,6 +34,9 @@ Finish creation tools
 transitions + screen storing (transition screen to screen)
 screen splitting
 screen storing serialization for persistence
+Information scrolling on top or bottom of screens, implement way to add text that is scrolled across or find something for it
 creation tools UI/UX (take tools and get them checked for usability, also design a usage guide)
+Password or way to restrict editting functionality, and a way to keep it easy to find/not forgotten (probably in whatever design manual for the UI editting we make)
+Menu editting manual after creation tools are finalized
 
 Create content after everything else is done
