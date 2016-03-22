@@ -1,0 +1,216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!43 &4300000
+Mesh:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  serializedVersion: 8
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 90
+    topology: 0
+    firstVertex: 0
+    vertexCount: 32
+    localAABB:
+      m_Center: {x: -7.4505806e-09, y: -7.4505806e-09, z: -0}
+      m_Extent: {x: .228019387, y: .169388741, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 0
+  m_StreamCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexBuffer: 00000100020003000100000003000400010005000400030005000600040007000600050007000800060009000800070009000a00080009000b000a000c000b0009000c000d000b000c000e000d000c000f000e000c0010000f000c00110010000c00120011000c00130012000c0014001300150014000c0015001600140017001600150017001800160019001800170019001a0018001b001a0019001b001c001a001d001c001b001c001d001e00100011001f00
+  m_Skin: []
+  m_VertexData:
+    m_CurrentChannels: 29
+    m_VertexCount: 32
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 2
+      dimension: 1
+    - stream: 0
+      offset: 16
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_Streams:
+    - channelMask: 29
+      offset: 0
+      stride: 32
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    m_DataSize: 1024
+    _typelessdata: 5036b5bc23891ebe00000080ffffffff00000000000000000000000000000000195d603ec2f0b33d00000080ffffffff000000000000000000000000000000003194593eb263a33d00000080ffffffff000000000000000000000000000000009067f9bc637f25be00000080ffffffff000000000000000000000000000000003170683ee0eeda3d00000080ffffffff00000000000000000000000000000000d8cc4abd3f742dbe00000080ffffffff00000000000000000000000000000000e97d693efb3af03d00000080ffffffff0000000000000000000000000000000042ec8ebd3f742dbe00000080ffffffff000000000000000000000000000000003170683e8bc3023e00000080ffffffff00000000000000000000000000000000caf6b5bd637f25be00000080ffffffff00000000000000000000000000000000195d603e9a42163e00000080ffffffff000000000000000000000000000000003194593e22891e3e00000080ffffffff000000000000000000000000000000006601c7bd23891ebe00000080ffffffff00000000000000000000000000000000050e513e627f253e00000080ffffffff00000000000000000000000000000000c5873d3e3e742d3e00000080ffffffff00000000000000000000000000000000d9c4283e3e742d3e00000080ffffffff00000000000000000000000000000000953f153e627f253e00000080ffffffff0000000000000000000000000000000040754dbddc3906bd00000080ffffffff000000000000000000000000000000007ca25fbdbc4012bd00000080ffffffff00000000000000000000000000000000767b84bdbc4012bd00000080ffffffff000000000000000000000000000000001e8f8dbddc3906bd00000080ffffffff00000000000000000000000000000000cd925abe1cdc1dbd00000080ffffffff000000000000000000000000000000000e3f16be045a313d00000080ffffffff000000000000000000000000000000000e8961bed88df7bc00000080ffffffff0000000000000000000000000000000050c529be742d513d00000080ffffffff00000000000000000000000000000000ea7d69be90c936bc00000080ffffffff000000000000000000000000000000003b883ebe742d513d00000080ffffffff00000000000000000000000000000000ea7d69be305d153c00000080ffffffff00000000000000000000000000000000810d52be045a313d00000080ffffffff000000000000000000000000000000000e8961bea8d7e63c00000080ffffffff00000000000000000000000000000000cd925abe0481153d00000080ffffffff0000000000000000000000000000000047ba0c3e22891e3e00000080ffffffff00000000000000000000000000000000
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BindPoses:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Colors:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+  m_LocalAABB:
+    m_Center: {x: -7.4505806e-09, y: -7.4505806e-09, z: -0}
+    m_Extent: {x: .228019387, y: .169388741, z: 0}
+  m_MeshUsageFlags: 0
+  m_MeshOptimized: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35648741dd5b14baa82bec08abfe7457, type: 3}
+  m_Name: tick11
+  m_EditorClassIdentifier: 
+  _documentAsset: {fileID: 11400002}
+  _sharedMesh: {fileID: 4300000}
+  _generateCollider: 0
+  _colliderShape: []
+  _format: 2
+  _scale: .00999999978
+  _vpm: 1000
+  _depthOffset: .00999999978
+  _compressDepth: 1
+  _pivotPoint: {x: .5, y: .5}
+  _customPivotPoint: 0
+  _border:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  _sharedGradients:
+  - colorKeys:
+    - time: 1
+      color:
+        serializedVersion: 2
+        rgba: 4294967295
+    - time: 0
+      color:
+        serializedVersion: 2
+        rgba: 4294967295
+    alphaKeys:
+    - time: 1
+      alpha: 1
+    - time: 0
+      alpha: 1
+    _hash: GC999FFFFFFC000FFFFFFA999001A000001
+    index: 0
+    atlasIndex: 0
+    references: 0
+  _sharedShaders:
+  - SVG Importer/GradientColor/GradientColorAlphaBlended
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363e9872ad27a4ca59c07d233fdf0023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _infoString: 32 Vertices, 90 Triangles, Color, UV, UV2
+  _errors: 
+  _svgFile: "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\r\n<!-- Generator: Adobe
+    Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<!DOCTYPE
+    svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n<svg
+    version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"
+    x=\"0px\" y=\"0px\"\r\n\t width=\"45.701px\" height=\"45.7px\" viewBox=\"0 0 45.701
+    45.7\" style=\"enable-background:new 0 0 45.701 45.7;\" xml:space=\"preserve\"\r\n\t>\r\n\t\t<path
+    fill=\"#FFFFFF\" d=\"M20.687,38.332c-2.072,2.072-5.434,2.072-7.505,0L1.554,26.704c-2.072-2.071-2.072-5.433,0-7.504\r\n\t\t\tc2.071-2.072,5.433-2.072,7.505,0l6.928,6.927c0.523,0.522,1.372,0.522,1.896,0L36.642,7.368c2.071-2.072,5.433-2.072,7.505,0\r\n\t\t\tc0.995,0.995,1.554,2.345,1.554,3.752c0,1.407-0.559,2.757-1.554,3.752L20.687,38.332z\"/>\t\r\n</svg>\r\n"
+  _title: 
+  _description: 

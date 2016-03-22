@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!43 &4300000
+Mesh:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  serializedVersion: 8
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 132
+    topology: 0
+    firstVertex: 0
+    vertexCount: 34
+    localAABB:
+      m_Center: {x: 0, y: 0, z: -0}
+      m_Extent: {x: .159895003, y: .160009995, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_MeshCompression: 0
+  m_StreamCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexBuffer: 0000020001000100030000000400060005000500070004000800090006000a00080006000a0006000b000a000b000c000d000a000c000e000d000c000e000c000f0010000e000f0010000f0000001100100000001100000003001100030012001300110012001200140013001500170016001500160009001800150009001900180009001a00190009001b001a0009001b0009001c001b001c001d001b001d000d000d000e001b000600090016000500060016001e00050016001e0016001f0020001e001f0020001f0021000300200021002100120003001d001c00080008000a001d000c000b0004000c000400070002000c000700010002000700010007001e001e0020000100
+  m_Skin: []
+  m_VertexData:
+    m_CurrentChannels: 29
+    m_VertexCount: 34
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 2
+      dimension: 1
+    - stream: 0
+      offset: 16
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 24
+      format: 0
+      dimension: 2
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_Streams:
+    - channelMask: 29
+      offset: 0
+      stride: 32
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    - channelMask: 0
+      offset: 0
+      stride: 0
+      dividerOp: 0
+      frequency: 0
+    m_DataSize: 1088
+    _typelessdata: 8c0c6bbdc85e0f3e00000080ffffffff000000000000000000000000000000003a1569bd4ad74c3d00000080ffffffff00000000000000000000000000000000720815bd4ad74c3d00000080ffffffff00000000000000000000000000000000ab0e99bd1c7c013e00000080ffffffff0000000000000000000000000000000098e701bd80ecf53c00000080ffffffff00000000000000000000000000000000d8faa2bcae69debd00000080ffffffff0000000000000000000000000000000000c012380a0cd9bd00000080ffffffff0000000000000000000000000000000060f455bd88d7f53c00000080ffffffff000000000000000000000000000000004433563d88d7f53c00000080ffffffff00000000000000000000000000000000a878a33cae69debd00000080ffffffff000000000000000000000000000000009c5e693d4ad74c3d00000080ffffffff00000000000000000000000000000000041c023d80ecf53c00000080ffffffff00000000000000000000000000000000e427153d4ad74c3d00000080ffffffff000000000000000000000000000000001e2e993d1c7c013e00000080ffffffff00000000000000000000000000000000c2fa9f3da1a11f3e00000080ffffffff0000000000000000000000000000000078366b3dc85e0f3e00000080ffffffff00000000000000000000000000000000ba88973dedf5223e00000080ffffffff000000000000000000000000000000000d4f8fbda9d9233e00000080ffffffff000000000000000000000000000000008cd621be28f73b3d00000080ffffffff00000000000000000000000000000000ca7197bd3cf7223e00000080ffffffff000000000000000000000000000000000fd69fbda1a11f3e00000080ffffffff000000000000000000000000000000001084013ca5ed1fbe00000080ffffffff0000000000000000000000000000000020c1ffbbe5f21fbe00000080ffffffff0000000000000000000000000000000000a06638a9d923be00000080ffffffff00000000000000000000000000000000e4da203e5444063d00000080ffffffff000000000000000000000000000000001a39233e3a7f133d00000080ffffffff0000000000000000000000000000000084bb233e30992a3d00000080ffffffff000000000000000000000000000000003ced203e3889413d00000080ffffffff00000000000000000000000000000000807d043e88d7f53c00000080ffffffff00000000000000000000000000000000a483053e4ad74c3d00000080ffffffff00000000000000000000000000000000c66d04be88d7f53c00000080ffffffff00000000000000000000000000000000a29721bee0710a3d00000080ffffffff00000000000000000000000000000000eb7305be4ad74c3d00000080ffffffff0000000000000000000000000000000084bb23beca24233d00000080ffffffff00000000000000000000000000000000
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BindPoses:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Colors:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+  m_LocalAABB:
+    m_Center: {x: 0, y: 0, z: -0}
+    m_Extent: {x: .159895003, y: .160009995, z: 0}
+  m_MeshUsageFlags: 0
+  m_MeshOptimized: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35648741dd5b14baa82bec08abfe7457, type: 3}
+  m_Name: diamond18
+  m_EditorClassIdentifier: 
+  _documentAsset: {fileID: 11400002}
+  _sharedMesh: {fileID: 4300000}
+  _generateCollider: 0
+  _colliderShape: []
+  _format: 2
+  _scale: .00999999978
+  _vpm: 1000
+  _depthOffset: .00999999978
+  _compressDepth: 1
+  _pivotPoint: {x: .5, y: .5}
+  _customPivotPoint: 0
+  _border:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  _sharedGradients:
+  - colorKeys:
+    - time: 1
+      color:
+        serializedVersion: 2
+        rgba: 4294967295
+    - time: 0
+      color:
+        serializedVersion: 2
+        rgba: 4294967295
+    alphaKeys:
+    - time: 1
+      alpha: 1
+    - time: 0
+      alpha: 1
+    _hash: GC999FFFFFFC000FFFFFFA999001A000001
+    index: 0
+    atlasIndex: 0
+    references: 0
+  _sharedShaders:
+  - SVG Importer/GradientColor/GradientColorAlphaBlended
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363e9872ad27a4ca59c07d233fdf0023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _infoString: 34 Vertices, 132 Triangles, Color, UV, UV2
+  _errors: 
+  _svgFile: "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\r\n<!-- Generator: Adobe
+    Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<!DOCTYPE
+    svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n<svg
+    version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"
+    x=\"0px\" y=\"0px\"\r\n\t width=\"32.016px\" height=\"32.016px\" viewBox=\"0 0
+    32.016 32.016\" style=\"enable-background:new 0 0 32.016 32.016;\"\r\n\t xml:space=\"preserve\">\r\n\t\t\t<path
+    fill=\"#FFFFFF\" d=\"M31.979,11.843c0-0.004-0.001-0.007-0.002-0.01c-0.039-0.212-0.124-0.407-0.272-0.55L23.801,0.419\r\n\t\t\t\tc-0.057-0.078-0.127-0.144-0.201-0.201c-0.019-0.014-0.036-0.024-0.056-0.036c-0.101-0.066-0.206-0.12-0.322-0.147\r\n\t\t\t\tc0,0-0.001-0.001-0.003-0.001c-0.002-0.001-0.005,0-0.008,0c-0.07-0.017-0.146-0.027-0.219-0.027h-14\r\n\t\t\t\tc-0.075,0-0.148,0.01-0.221,0.026c-0.003,0-0.005-0.001-0.008,0c-0.001,0-0.001,0.001-0.002,0.001\r\n\t\t\t\tC8.646,0.062,8.54,0.115,8.439,0.182C8.421,0.195,8.402,0.204,8.385,0.218C8.311,0.277,8.239,0.341,8.185,0.419l-8,11\r\n\t\t\t\tc-0.019,0.023-0.025,0.052-0.041,0.076c-0.016,0.026-0.037,0.048-0.051,0.075c-0.007,0.016-0.009,0.032-0.016,0.049\r\n\t\t\t\tc-0.021,0.045-0.032,0.09-0.044,0.137c-0.012,0.043-0.022,0.084-0.028,0.127C-0.001,11.931,0,11.978,0,12.025\r\n\t\t\t\tc0.001,0.045,0.002,0.088,0.008,0.131c0.007,0.046,0.021,0.09,0.033,0.135c0.014,0.044,0.025,0.088,0.045,0.13\r\n\t\t\t\tc0.007,0.014,0.008,0.028,0.015,0.041c0.017,0.031,0.039,0.055,0.06,0.083c0.018,0.027,0.027,0.058,0.048,0.083l15,19\r\n\t\t\t\tc0.016,0.02,0.041,0.027,0.058,0.046c0.04,0.045,0.078,0.093,0.126,0.13c0.025,0.02,0.058,0.028,0.083,0.045\r\n\t\t\t\tc0.009,0.006,0.02,0.01,0.026,0.016c0.034,0.021,0.063,0.039,0.1,0.056c0.04,0.019,0.08,0.03,0.123,0.044\r\n\t\t\t\tc0.017,0.005,0.026,0.018,0.042,0.021c0.073,0.015,0.147,0.022,0.221,0.022c0.003,0,0.004,0.001,0.005,0.001h0.002\r\n\t\t\t\tc0.002,0,0.003-0.001,0.003-0.001c0.074,0,0.148-0.009,0.224-0.024c0.016-0.004,0.027-0.016,0.042-0.021\r\n\t\t\t\tc0.043-0.013,0.083-0.026,0.122-0.044c0.036-0.016,0.066-0.035,0.1-0.055c0.011-0.006,0.019-0.01,0.027-0.017\r\n\t\t\t\tc0.026-0.017,0.057-0.024,0.082-0.045c0.049-0.037,0.086-0.085,0.127-0.13c0.017-0.02,0.042-0.025,0.058-0.046l14.918-18.896\r\n\t\t\t\tc0.194-0.183,0.317-0.437,0.317-0.724C32.013,11.948,31.988,11.899,31.979,11.843z
+    M21.732,2.007l-2.101,9h-7.28l-2.1-9H21.732z\r\n\t\t\t\t M8.516,3.363l1.783,7.644H2.957L8.516,3.363z
+    M3.057,13.007h7.709L14,26.868L3.057,13.007z M15.993,26.606l-3.175-13.6h6.348\r\n\t\t\t\tL15.993,26.606z
+    M17.985,26.868l3.234-13.861h7.709L17.985,26.868z M21.687,11.007l1.782-7.644l5.559,7.644H21.687z\"/>\r\n</svg>\r\n"
+  _title: 
+  _description: 
