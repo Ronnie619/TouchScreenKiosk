@@ -15,10 +15,13 @@ public class CC_Selectable : MonoBehaviour {
 
 	public static GameObject selected;										//Currently selected gameobject
 	public static List<GameObject> selectables = new List<GameObject>();	//List of all selectable objects
+	public static bool creationMode;
 
 	//Colors used for transitioning between selected and not selected
 	Color startColor;			//Start color of a selectable
 	public Color endColor;		//End color of a selectable
+
+	public int myCanvas;
 
 	/// <summary>
 	/// Start will get our image and update what our default color is, and add ourselves to the list of objects
@@ -30,6 +33,16 @@ public class CC_Selectable : MonoBehaviour {
 
 		if (!selectables.Contains(gameObject))
 			selectables.Add(gameObject);
+	}
+
+	public static void CreateUIElement(GameObject g) {
+		selectables.Add(g);
+		g.GetComponent<CC_Selectable>().enabled = creationMode;
+
+		Button button = g.GetComponent<Button>();
+		if (button != null) {
+			button.interactable = !creationMode;
+		}
 	}
 
 	/// <summary>

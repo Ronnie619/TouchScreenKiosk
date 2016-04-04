@@ -17,6 +17,7 @@ public class CC_Manager : MonoBehaviour {
 	List<CC_Menu> menus = new List<CC_Menu>(); 							//List of all currently registered menus
 
 	public GameObject menuButtonPrefab;									//Prefab for menu buttons
+	public GameObject menuSpacingPrefab;								//Prefab for a menu spacing element
 	public GameObject menuPanelPrefab;									//Prefab for menu panel
 
 	//Prefabs for instantiating UI elements
@@ -25,6 +26,9 @@ public class CC_Manager : MonoBehaviour {
 	public GameObject textPrefab;
 	
 	public List<GameObject> allUIElements = new List<GameObject>();		//All UI elements on screen 
+
+	public Background_Handler backgroundHandler;
+	public Img_Handler imageHandler;
 
 	//States for the CC editor
 	//If you add a state here, you will need to register your menu to be rendered during that state
@@ -54,6 +58,7 @@ public class CC_Manager : MonoBehaviour {
 	void Start() {
 		CreateMenus();
 		CC_UISelectionManager._instance.Initialize();
+		UIManager._instance.CreateWindowManagerMenu();
 
 		SetCCState(CCState.Default);
 	}
@@ -75,19 +80,54 @@ public class CC_Manager : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// When a window is loaded this is called
+	/// </summary>
+	public void LoadWindow (UIWindow.WindowData data, int index) {
+		for (int i = 0; i < allUIElements.Count; i++) {
+			GameObject g = allUIElements[i];
+			if (g == null) {
+				allUIElements.Remove(g);
+				i--;
+			}
+			else if (CC_Selectable.selectables.Contains(g) && g.GetComponent<CC_Selectable>().myCanvas == index) {
+				CC_Selectable.selectables.Remove(g);
+				Destroy(g);
+			}
+		}
+		CC_UISelectionManager._instance.LoadWindow();
+		SetCCState(CCState.Off);
+	}
+
+	/// <summary>
 	/// Sets the current CCState and renders all displayed menus for this state
 	/// </summary>
-	void SetCCState(CCState newState) {
+	void SetCCState(CCState newState, bool updateMenus) {
 		//Begin state enable stuff
 
 		//Begin state disable stuff
+		if (newState != CCState.Selecting)
+			CC_Selectable.CancelSelect();
+
 		CC_Menu CreationMenu = GetMenuByName("CreationMenu");
 		if (CreationMenu != null)
 			CreationMenu.SetEnabled(false);
 
+		CC_Menu windowManagerMenu = GetMenuByName("WindowManagerMenu");
+		if (windowManagerMenu != null)
+			windowManagerMenu.SetEnabled(false);
+
+		CC_UISelectionManager._instance.ChangeCCState(newState);
+
+		backgroundHandler.Disable();
+
 		//Menu rendering
-		UpdateMenus(newState);
+		if (updateMenus)
+			UpdateMenus(newState);
 		currState = newState;
+	}
+
+	void SetCCState(CCState newState) {
+		SetCCState(newState, true);
 	}
 
 	/// <summary>
@@ -159,6 +199,8 @@ public class CC_Manager : MonoBehaviour {
 		CC_Menu menu = CreateNewCC_Menu (menuPanelPrefab, renderStates, "CCMenu");
 		menu.AddButton(menuButtonPrefab, () => StopEditMode(), "Stop Editting");
 		menu.AddButton(menuButtonPrefab, () => OpenUIElementCreationMenu(), "Creation Menu");
+		menu.AddButton(menuButtonPrefab, () => CallBackground(), "Background Color Menu");
+		menu.AddButton(menuButtonPrefab, () => ToggleWindowManager(), "Save/Load");
 		menu.SetEnabled(true);
 	}
 
@@ -171,6 +213,11 @@ public class CC_Manager : MonoBehaviour {
 		menu.AddButton(menuButtonPrefab, () => CreateButton(), "Create Button");
 		menu.AddButton(menuButtonPrefab, () => CreateImage(), "Create Image");
 		menu.AddButton(menuButtonPrefab, () => CreateText(), "Create Text");
+	}
+
+	public void CallBackground(){
+			//Background_Handler temp = new Background_Handler();
+			backgroundHandler.Toggle();
 	}
 
 	/// <summary>
@@ -198,7 +245,7 @@ public class CC_Manager : MonoBehaviour {
 	/// </summary>
 	void CreateButton() {
 		GameObject button = Instantiate(buttonPrefab) as GameObject;
-		button.transform.SetParent(UIManager._instance.GetMyCanvas(1), false);
+		button.transform.SetParent(UIManager._instance.GetMyCanvas(0), false);
 		button.GetComponent<Button>().interactable = false;
 		allUIElements.Add(button);
 	}
@@ -208,7 +255,7 @@ public class CC_Manager : MonoBehaviour {
 	/// </summary>
 	void CreateImage() {
 		GameObject image = Instantiate(imagePrefab) as GameObject;
-		image.transform.SetParent(UIManager._instance.GetMyCanvas(1), false);
+		image.transform.SetParent(UIManager._instance.GetMyCanvas(0), false);
 		allUIElements.Add(image);
 	}
 
@@ -217,7 +264,7 @@ public class CC_Manager : MonoBehaviour {
 	/// </summary>
 	void CreateText() {
 		GameObject text = Instantiate(textPrefab) as GameObject;
-		text.transform.SetParent(UIManager._instance.GetMyCanvas(1), false);
+		text.transform.SetParent(UIManager._instance.GetMyCanvas(0), false);
 		allUIElements.Add(text);
 	}
 	
@@ -232,8 +279,14 @@ public class CC_Manager : MonoBehaviour {
 	/// Opens the Creation Menu
 	/// </summary>
 	void OpenUIElementCreationMenu() {
-		SetCCState(CCState.Default);
+		SetCCState(CCState.Default, false);
 		GetMenuByName("CreationMenu").ToggleEnabled();
+		UpdateMenus();
+	}
+
+	void ToggleWindowManager() {
+		SetCCState(CCState.Default, false);
+		GetMenuByName("WindowManagerMenu").ToggleEnabled();
 		UpdateMenus();
 	}
 

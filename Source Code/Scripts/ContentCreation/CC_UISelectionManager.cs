@@ -11,21 +11,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
 public class CC_UISelectionManager : MonoBehaviour {
 
+	public static string imgPath;
 	public static CC_UISelectionManager _instance;	//Singleton reference
-
 	public GameObject selected;						//Object being selected atm
 	RectTransform selectedRT;						//RectTransform of that object
+	Button mybutton;
+	public Img_Handler currImgHandler;
+	public Url_handler currURLHandler;
+	public CC_Menu menu;
+	Canvas myCanvas;
+
+	public static string url;
+	public static string urltext;
 
 	//Enum for what kind of selection we are currently using
 	public enum SelectionType {
 		Move = 0,
 		Rotate = 1,
-		Scale = 2
+		Scale = 2,
 	}
-	SelectionType editMode;
+	public SelectionType editMode;
 
 	//Variables used for left mouse dragging
 	Vector2 lastMousePos;							//Last frames mouse position used for checking mouseDelta
@@ -41,11 +50,25 @@ public class CC_UISelectionManager : MonoBehaviour {
 		} else _instance = this;
 	}
 
+	void Start() {
+		myCanvas = UIManager._instance.GetMyCanvas(0).GetComponent<Canvas>();
+
+		SetEditMode(SelectionType.Move);
+		
+		if (currImgHandler == null) { //Should be set with public var but heres a backup
+			GameObject g = (GameObject)FindObjectOfType(typeof(Img_Handler));
+			currImgHandler = g.GetComponent<Img_Handler>();
+		}
+	}
+
 	/// <summary>
 	/// When we enable, we want to set creation mode for all selectables
 	/// </summary>
 	void OnEnable() {
+		CC_Selectable.creationMode = true;
 		foreach (GameObject g in CC_Selectable.selectables) {
+			if (g == null)
+				continue;
 			g.GetComponent<CC_Selectable>().SetCreationMode(true);
 		}
 	}
@@ -54,17 +77,16 @@ public class CC_UISelectionManager : MonoBehaviour {
 	/// When we disable, we want to set creation mode for all selectables
 	/// </summary>
 	void OnDisable() {
+		CC_Selectable.creationMode = false;
 		foreach (GameObject g in CC_Selectable.selectables) {
+			if (g == null)
+				continue;
 			g.GetComponent<CC_Selectable>().SetCreationMode(false);
 		}
 	}
 
 	public void Initialize() {
 		CreateSelectionMenu();
-	}
-
-	void Start() {
-		SetEditMode(SelectionType.Move);
 	}
 
 	/// <summary>
@@ -82,17 +104,19 @@ public class CC_UISelectionManager : MonoBehaviour {
 
 		if (isMouseover()) {
 			if (Input.GetMouseButtonDown(0) && !isDragging) { //Begin drag
-				startDrag = Input.mousePosition;
-				lastMousePos = Input.mousePosition;
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out lastMousePos);
+				startDrag = lastMousePos;
 				isDragging = true;
 			}
 		}
 
 		if (isDragging && Input.GetMouseButtonUp(0)) {
 			isDragging = false;
-			if (selectedRT.transform.position.x > Screen.width || selectedRT.transform.position.x < 0
-			    || selectedRT.transform.position.y > Screen.height || selectedRT.transform.position.y < 0) {
-				selectedRT.transform.position = startDrag;
+
+			Vector3 pos = Camera.main.WorldToScreenPoint(selected.transform.position);
+			if (pos.x > Screen.width || pos.x < 0
+			    || pos.y > Screen.height || pos.y < 0) {
+				selected.transform.position = myCanvas.transform.TransformPoint(startDrag);
 			}
 		}
 
@@ -105,12 +129,16 @@ public class CC_UISelectionManager : MonoBehaviour {
 	/// Processes the movement of a mouse 0 drag based on our edit mode
 	/// </summary>
 	void ProcessMovement() {
-		Vector2 mouseDelta = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - lastMousePos;
-		lastMousePos = Input.mousePosition;
+		Vector2 currMousePos;
+		RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out currMousePos);
+		Vector2 mouseDelta = currMousePos - lastMousePos;
 
 		switch(editMode) {
 		case SelectionType.Move: 
-			selected.transform.position += new Vector3(mouseDelta.x, mouseDelta.y, selected.transform.position.z);
+			selected.transform.position = myCanvas.transform.TransformPoint
+				(new Vector3(selected.transform.position.x, selected.transform.position.y, 0) 
+				 + new Vector3(currMousePos.x, currMousePos.y, 0));
+			
 			break;
 		case SelectionType.Scale:
 			selected.transform.localScale += new Vector3(mouseDelta.x, mouseDelta.y, 0)/100;
@@ -120,15 +148,19 @@ public class CC_UISelectionManager : MonoBehaviour {
 			float negRot = mouseDelta.x; //todo proper rot
 			float posRot = mouseDelta.y;
 			selected.transform.Rotate(Vector3.forward, negRot + posRot);
-			break;
+			break;			
 		}
+
+		lastMousePos = currMousePos;
 	}
 
 	/// <summary>
 	/// Checks if we are currently selecting inside the rect transform of our current selectable
 	/// </summary>
 	bool isMouseover() {
-		return RectTransformUtility.RectangleContainsScreenPoint(selectedRT, Input.mousePosition, null);
+		Vector2 currMousePos;
+		RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out currMousePos);
+		return RectTransformUtility.RectangleContainsScreenPoint(selectedRT, myCanvas.transform.TransformPoint(currMousePos), null);
 	}
 
 	/// <summary>
@@ -136,10 +168,85 @@ public class CC_UISelectionManager : MonoBehaviour {
 	/// </summary>
 	void CreateSelectionMenu() {
 		CC_Manager.CCState[] renderStates = { CC_Manager.CCState.Selecting };
-		CC_Menu menu = CC_Manager._instance.CreateNewCC_Menu(renderStates, "SelectionMenu");
+		//CC_Menu menu = CC_Manager._instance.CreateNewCC_Menu(renderStates, "SelectionMenu");
+		menu = CC_Manager._instance.CreateNewCC_Menu(renderStates, "SelectionMenu");
+		
 		menu.AddButton(() => SetMoveMode(), "Move");
 		menu.AddButton(() => SetRotateMode(), "Rotate");
 		menu.AddButton(() => SetScaleMode(), "Scale");
+		menu.AddSpace(25);
+		menu.AddButton(() => DeleteObject(), "Delete");
+		menu.AddSpace(25);
+		menu.AddButton(() => CallImgHandler(), "Image Handler");
+		menu.AddButton(() => CallingURLHandler(), "Url Handler");
+		menu.AddButton(() => CallTransitionHandler(), "Button Settings");
+	}
+
+	void UpdateSelectionMenu() {
+		CC_ButtonSettings._instance.Disable();
+
+		menu.ShowAllButtons();
+		if (selected.GetComponent<ButtonData>()) {
+
+		} else if (selected.GetComponent<ImageData>()) {
+			menu.HideButton(5);
+			menu.HideButton(6);
+		} else if (selected.GetComponent<TextData>()) {
+			menu.HideButton(4);
+			menu.HideButton(5);
+			menu.HideButton(6);
+		}
+	}
+
+	public void LoadWindow() {
+		if (CC_ButtonSettings._instance != null)
+			CC_ButtonSettings._instance.Disable();
+		currImgHandler.Disable();
+		currURLHandler.Disable();
+	}
+
+	public void ChangeCCState(CC_Manager.CCState state) {
+		if (CC_ButtonSettings._instance != null)
+			CC_ButtonSettings._instance.Disable();
+		currImgHandler.Disable();
+		currURLHandler.Disable();
+	}
+
+	public void SetIMGPath(string temp){
+		imgPath = temp;
+		Debug.Log("Loading current image: " + imgPath + ".jpg");
+	}
+	
+	void DeleteObject(){
+		CC_Selectable.selectables.Remove(selected);
+		Destroy(selected);
+		CC_Selectable.CancelSelect();
+	}
+	
+	public void CallingURLHandler(){
+		currURLHandler.callurlhandler();
+	}
+
+	void CallTransitionHandler() {
+		CC_ButtonSettings._instance.Toggle(selected.GetComponent<ButtonData>());
+	}
+
+	public void AssignURL(){
+		mybutton = selected.GetComponent<Button>();
+		mybutton.onClick.AddListener(OpenURL);
+ 		Text aButton = selected.GetComponentInChildren<Text>();
+ 		aButton.text = url;
+	}
+
+	/*
+	public void SetURL(string temp){
+		url = temp;
+	} */
+	
+	void OpenURL(){ Application.OpenURL(url);}
+
+	void CallImgHandler(){
+		currImgHandler.Enable(selected);
 	}
 
 	/// <summary>
@@ -171,6 +278,13 @@ public class CC_UISelectionManager : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Called when we stop selecting an object
+	/// </summary>
+	void StopSelecting() {
+		currImgHandler.Disable();
+	}
+
+	/// <summary>
 	/// Gets a selected selectable and if valid, will set the selectable and change to selection state
 	/// </summary>
 	public void Select(GameObject g) {
@@ -181,7 +295,11 @@ public class CC_UISelectionManager : MonoBehaviour {
 		if (g != null) {
 			selectedRT = selected.GetComponent<RectTransform>();
 			CC_Manager._instance.SelectObject(g);
-		} else CC_Manager._instance.DeselectObject();
+			UpdateSelectionMenu();
+		} else {
+			StopSelecting();
+			CC_Manager._instance.DeselectObject();
+		}
 	}
 
 	/// <summary>

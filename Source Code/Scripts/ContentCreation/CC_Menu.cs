@@ -25,6 +25,11 @@ public class CC_Menu : ScriptableObject {
 			return CC_Manager._instance.menuButtonPrefab;
 		}
 	}
+	public GameObject spacingPrefab {
+		get {
+			return CC_Manager._instance.menuSpacingPrefab;
+		}
+	}
 	public List<CC_Manager.CCState> renderStates = new List<CC_Manager.CCState>();	//States that this menu is rendered in
 	List<Button> Buttons = new List<Button>();										//Buttons tied to this menu
 	Transform myPanel;																//Panel this menu is attached to
@@ -64,6 +69,7 @@ public class CC_Menu : ScriptableObject {
 	/// </summary>
 	public void ToggleEnabled() {
 		menuEnabled = !myPanel.gameObject.activeSelf;
+		//menuEnabled = !menuEnabled;
 	}
 
 	/// <summary>
@@ -71,7 +77,8 @@ public class CC_Menu : ScriptableObject {
 	/// Is called during the UpdateMenus() function
 	/// </summary>
 	public void StopRender() {
-		myPanel.gameObject.SetActive(false);
+		if (myPanel != null)
+			myPanel.gameObject.SetActive(false);
 	}
 
 	public bool isEnabled() {
@@ -79,7 +86,25 @@ public class CC_Menu : ScriptableObject {
 	}
 
 	public string GetName() {
-		return myPanel.name;
+		if (myPanel != null)
+			return myPanel.name;
+		else return "";
+	}
+
+	/// <summary>
+	/// Hides the button.
+	/// </summary>
+	public void HideButton(int i) {
+		Buttons[i].gameObject.SetActive(false);
+	}
+
+	/// <summary>
+	/// Shows all buttons.
+	/// </summary>
+	public void ShowAllButtons() {
+		for (int i = 0; i < Buttons.Count; i++) {
+			Buttons[i].gameObject.SetActive(true);
+		}
 	}
 
 	/// <summary>
@@ -118,6 +143,14 @@ public class CC_Menu : ScriptableObject {
 		b.GetComponent<LayoutElement>().minWidth = 10*buttonText.Length;
 		b.GetComponent<LayoutElement>().minHeight = menuSize - 10;
 		b.onClick.AddListener(callback);
+		Buttons.Add(b);
+	}
+
+	public void AddSpace (int size) {
+		GameObject obj = Instantiate(spacingPrefab) as GameObject;
+		obj.transform.SetParent(myPanel, false);
+		obj.GetComponent<LayoutElement>().minWidth = size;
+		obj.GetComponent<LayoutElement>().minHeight = menuSize - 10;
 	}
 
 	public void AddButton(UnityAction callback, string buttonText) {
