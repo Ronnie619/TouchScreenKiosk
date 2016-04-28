@@ -89,13 +89,13 @@ public class UWKWebView : MonoBehaviour
     /// Max width of the UWKWebView, defined at creation time.  It is possible to set the 
     /// view's current width to be equal or smaller than this value
     /// </summary>    
-    public int MaxWidth = 1920;
+    public int MaxWidth = 1024;
 
     /// <summary>
     /// Max height of the UWKWebView, defined at creation time.  It is possible to set the 
     /// view's current height to be equal or smaller than this value
     /// </summary>        
-    public int MaxHeight = 1920;
+    public int MaxHeight = 1024;
 	
 	/// <summary>
 	/// Used to make the scroll wheel/trackpad more sensitive
