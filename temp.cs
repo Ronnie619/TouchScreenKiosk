@@ -34,6 +34,7 @@ public class CC_UISelectionManager : MonoBehaviour {
 		Move = 0,
 		Rotate = 1,
 		Scale = 2,
+		None = 3
 	}
 	public SelectionType editMode;
 
@@ -54,7 +55,7 @@ public class CC_UISelectionManager : MonoBehaviour {
 	void Start() {
 		myCanvas = UIManager._instance.GetMyCanvas(0).GetComponent<Canvas>();
 
-		SetEditMode(SelectionType.Move);
+		SetEditMode(SelectionType.None);
 		
 		if (currImgHandler == null) { //Should be set with public var but heres a backup
 			GameObject g = (GameObject)FindObjectOfType(typeof(Img_Handler));
@@ -135,11 +136,10 @@ public class CC_UISelectionManager : MonoBehaviour {
 		Vector2 mouseDelta = currMousePos - lastMousePos;
 
 		switch(editMode) {
-		case SelectionType.Move: 
-			selected.transform.position = myCanvas.transform.TransformPoint
-				(new Vector3(selected.transform.position.x, selected.transform.position.y, 0) 
-				 + new Vector3(currMousePos.x, currMousePos.y, 0));
-			
+		case SelectionType.Move:
+			//Vector3 pos = myCanvas.transform.InverseTransformPoint(selected.transform.position);
+			//selected.transform.position = myCanvas.transform.TransformPoint(pos + new Vector3(currMousePos.x, currMousePos.y, 0));
+			selected.transform.localPosition += new Vector3(mouseDelta.x, mouseDelta.y, 0);
 			break;
 		case SelectionType.Scale:
 			selected.transform.localScale += new Vector3(mouseDelta.x, mouseDelta.y, 0)/100;
@@ -171,7 +171,8 @@ public class CC_UISelectionManager : MonoBehaviour {
 		CC_Manager.CCState[] renderStates = { CC_Manager.CCState.Selecting };
 		//CC_Menu menu = CC_Manager._instance.CreateNewCC_Menu(renderStates, "SelectionMenu");
 		menu = CC_Manager._instance.CreateNewCC_Menu(renderStates, "SelectionMenu");
-		
+
+		menu.AddButton(() => SetNoneMode(), "Select");
 		menu.AddButton(() => SetMoveMode(), "Move");
 		menu.AddButton(() => SetRotateMode(), "Rotate");
 		menu.AddButton(() => SetScaleMode(), "Scale");
@@ -252,6 +253,13 @@ public class CC_UISelectionManager : MonoBehaviour {
 
 	void CallImgHandler(){
 		currImgHandler.Enable(selected);
+	}
+
+	/// <summary>
+	/// Sets the none mode
+	/// </summary>
+	void SetNoneMode() {
+		SetEditMode(SelectionType.None);
 	}
 
 	/// <summary>
